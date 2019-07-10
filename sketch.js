@@ -1,4 +1,9 @@
 
+var screenHeight = $(window).height();
+var screenWidth = $(window).width();
+
+
+
 var Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies;
@@ -14,19 +19,23 @@ var ground;
 
 
 function setup() {
-    createCanvas(400, 400);
-    img = loadImage('location.png');
+    // createCanvas(400, 400);
+    createCanvas(screenWidth, screenHeight);
+    img = loadImage('hot-pepper.png');
     engine = Engine.create();
     world = engine.world;
     //circleA = Bodies.circle(1, 1, 32);
     //circleB = Bodies.circle(1, 100, 32);
-    ground = Bodies.rectangle(200, height, 350, 100, { isStatic: true });
+    // ground = Bodies.rectangle(width / 2, height + 50, 300, 100, { isStatic: true });
+    ground = Bodies.rectangle(screenWidth / 2, screenHeight + 50, screenWidth - 100, 100, { isStatic: true });
     Engine.run(engine);
     //World.add(world, [circleA, circleB]);
     circle1 = new Circle(1, 1, 64);
     World.add(world, ground);
-    setInterval(drawCircle, 1500);
+    setInterval(drawCircle, 1000);
     // drawCircle();
+    textAlign(CENTER, CENTER);
+    textSize(64);
 }
 
 function mousePressed() {
@@ -35,17 +44,23 @@ function mousePressed() {
 
 function draw() {
     background(220);
-    //ellipse(50, 50, 80, 80);
     //image(img, circleA.position.x, circleA.position.y);
     //image(img, circleB.position.x, circleB.position.y);
 
-    // Engine.update(engine);
+    Engine.update(engine);
     for (let i = 0; i < circles.length; i++) {
         circles[i].show();
+        if (circles[i].isOffScreen()) {
+            circles[i].removeFromWorld();
+            circles.splice(i, 1);
+            i--;
+        }
     }
-    //circle1.show();
+
+    text('Page in Construction', screenWidth / 2, screenHeight / 2);
 }
 
 function drawCircle() {
-    circles.push(new Circle(random(10, 350), 20, 32));
+    // circles.push(new Circle(random(10, 350), 20, 32));
+    circles.push(new Circle(random(screenWidth - 20, screenHeight - 20), 20, 32));
 }
