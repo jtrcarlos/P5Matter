@@ -1,6 +1,7 @@
 
 var screenHeight = $(window).height();
 var screenWidth = $(window).width();
+var screenWidthBorder = $(window).width() * 0.90;
 
 
 var Engine = Matter.Engine,
@@ -24,7 +25,7 @@ function setup() {
     //circleA = Bodies.circle(1, 1, 32);
     //circleB = Bodies.circle(1, 100, 32);
     // ground = Bodies.rectangle(width / 2, height + 50, 300, 100, { isStatic: true });
-    ground = Bodies.rectangle(screenWidth / 2, screenHeight + 50, screenWidth - 100, 100, { isStatic: true });
+    ground = Bodies.rectangle(screenWidth / 2, screenHeight + 50, screenWidthBorder, 100, { isStatic: true });
     Engine.run(engine);
     //World.add(world, [circleA, circleB]);
     circle1 = new Circle(1, 1, 64);
