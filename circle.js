@@ -1,5 +1,5 @@
 function Circle(x, y, radius) {
-    this.body = Bodies.circle(x, y, radius);
+    this.body = Bodies.circle(x, y, radius, { restitution: 0.5 });
     this.radius = radius;
     World.add(world, this.body);
 
