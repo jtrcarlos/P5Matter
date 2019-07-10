@@ -59,5 +59,5 @@ function draw() {
 
 function drawCircle() {
     // circles.push(new Circle(random(10, 350), 20, 32));
-    circles.push(new Circle(random(screenWidth - 20, screenHeight - 20), 20, 32));
+    circles.push(new Circle(random(20, screenWidth - 20), 20, 32));
 }
