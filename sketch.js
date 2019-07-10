@@ -3,7 +3,6 @@ var screenHeight = $(window).height();
 var screenWidth = $(window).width();
 
 
-
 var Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies;
@@ -14,8 +13,6 @@ var world;
 // var circleB;
 var circles = [];
 var ground;
-
-
 
 
 function setup() {
