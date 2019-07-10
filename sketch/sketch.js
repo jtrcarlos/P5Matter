@@ -60,5 +60,12 @@ function draw() {
 
 function drawCircle() {
     // circles.push(new Circle(random(10, 350), 20, 32));
-    circles.push(new Circle(random(20, screenWidth - 20), 20, 32));
+    circles.push(new Circle(random(20, screenWidth - 20), -20, 32));
 }
+
+console.log(`
+    This site was made using: 
+    https://p5js.org/
+    http://brm.io/matter-js/
+
+`);
