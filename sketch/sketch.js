@@ -6,6 +6,8 @@ var screenWidthBorder = $(window).width() * 0.90;
 
 var Engine = Matter.Engine,
     World = Matter.World,
+    Mouse = Matter.Mouse,
+    MouseConstraint = Matter.MouseConstraint,
     Bodies = Matter.Bodies;
 
 var engine;
@@ -15,10 +17,11 @@ var world;
 var circles = [];
 var ground;
 
+var mConstraint;
 
 function setup() {
     // createCanvas(400, 400);
-    createCanvas(screenWidth, screenHeight);
+    var canvas = createCanvas(screenWidth, screenHeight);
     img = loadImage('hot-pepper.png');
     engine = Engine.create();
     world = engine.world;
@@ -28,17 +31,31 @@ function setup() {
     ground = Bodies.rectangle(screenWidth / 2, screenHeight + 50, screenWidthBorder, 100, { isStatic: true });
     Engine.run(engine);
     //World.add(world, [circleA, circleB]);
-    circle1 = new Circle(1, 1, 64);
+    //circle1 = new Circle(1, 1, 64);
     World.add(world, ground);
-    setInterval(drawCircle, 1000);
+
+    /// DRAWS CIRCLE EVERY X MILISECONDS
+    setInterval(drawCircle, 500);
     // drawCircle();
     textAlign(CENTER, CENTER);
     textSize(64);
+
+    /// DRAG OBJECTS WITH MOUSE
+    // sync mouse canvas with screen
+    var canvasMouse = Mouse.create(canvas.elt);
+    canvasMouse.pixelRatio = pixelDensity();
+    var optionsMouse = {
+        mouse: canvasMouse
+    }
+
+    mConstraint = MouseConstraint.create(engine, optionsMouse);
+    World.add(world, mConstraint);
 }
 
-function mousePressed() {
-    circles.push(new Circle(mouseX, mouseY, 32));
-}
+/// CREATE OBJECTS WITH MOUSE
+// function mousePressed() {
+//     circles.push(new Circle(mouseX, mouseY, 32));
+// }
 
 function draw() {
     background(220);
